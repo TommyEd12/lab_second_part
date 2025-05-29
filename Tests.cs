@@ -1,4 +1,3 @@
-using System;
 using Lab;
 
 class Tests

@@ -1,5 +1,3 @@
-using System;
-
 namespace Lab
 {
     class Money
