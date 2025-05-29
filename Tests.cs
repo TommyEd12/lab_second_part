@@ -11,6 +11,7 @@ class Tests
         TestTypeConversions();
         TestBinaryOperatorsWithUInt();
         TestExceptionHandling();
+        TestUserInput();
         Console.WriteLine("Все тесты завершены.");
     }
 
@@ -19,8 +20,8 @@ class Tests
         Console.WriteLine("Тест конструктора и ToString():");
         Money m1 = new Money(10, 50);
         Money m2 = new Money();
-        Console.WriteLine($"m1: {m1.Rubles}"); 
-        Console.WriteLine($"m2: {m2}"); 
+        Console.WriteLine($"m1: {m1.Rubles}");
+        Console.WriteLine($"m2: {m2}");
         Console.WriteLine();
     }
 
@@ -28,8 +29,8 @@ class Tests
     {
         Console.WriteLine("Тест AddKopeks:");
         Money m1 = new Money(10, 50);
-        Money m2 = m1.AddKopeks(125); 
-        Console.WriteLine($"m1 + 125 копеек = {m2}"); 
+        Money m2 = m1.AddKopeks(125);
+        Console.WriteLine($"m1 + 125 копеек = {m2}");
         Console.WriteLine();
     }
 
@@ -39,9 +40,9 @@ class Tests
         Money m = new Money(10, 50);
         Console.WriteLine($"Исходное: {m}");
         m++;
-        Console.WriteLine($"После ++: {m}"); 
+        Console.WriteLine($"После ++: {m}");
         m--;
-        Console.WriteLine($"После --: {m}"); 
+        Console.WriteLine($"После --: {m}");
         Console.WriteLine();
     }
 
@@ -49,10 +50,10 @@ class Tests
     {
         Console.WriteLine("Тест операций приведения типов:");
         Money m = new Money(10, 50);
-        uint rubles = (uint)m; 
-        Console.WriteLine($"Явное приведение к uint (рубли): {rubles}"); 
-        double totalRubles = m; 
-        Console.WriteLine($"Неявное приведение к double (рубли с копейками): {totalRubles}"); 
+        uint rubles = (uint)m;
+        Console.WriteLine($"Явное приведение к uint (рубли): {rubles}");
+        double totalRubles = m;
+        Console.WriteLine($"Неявное приведение к double (рубли с копейками): {totalRubles}");
         Console.WriteLine();
     }
 
@@ -60,10 +61,10 @@ class Tests
     {
         Console.WriteLine("Тест бинарных операций с uint:");
         Money m = new Money(10, 50);
-        Money addResult = m + 125; 
-        Console.WriteLine($"m + 125 копеек = {addResult}"); 
-        Money subtractResult = m - 50; 
-        Console.WriteLine($"m - 50 копеек = {subtractResult}"); 
+        Money addResult = m + 125;
+        Console.WriteLine($"m + 125 копеек = {addResult}");
+        Money subtractResult = m - 50;
+        Console.WriteLine($"m - 50 копеек = {subtractResult}");
         Console.WriteLine();
     }
 
@@ -83,7 +84,7 @@ class Tests
         try
         {
             Money m = new Money(0, 10);
-            Money result = m - 20; 
+            Money result = m - 20;
         }
         catch (InvalidOperationException ex)
         {
@@ -91,5 +92,27 @@ class Tests
         }
 
         Console.WriteLine();
+    }
+    private static void TestUserInput()
+    {
+        try
+        {
+            Console.WriteLine("Введите количество рублей");
+            var input = Console.ReadLine();
+            if (input == "" || input == null)
+            {
+                Console.WriteLine();
+                throw new Exception();
+            }
+            var money = new Money(Convert.ToUInt16(input), 0);
+            money = money.AddKopeks(12);
+            Console.WriteLine(money.ToString());
+        }
+        catch 
+        {
+            Console.WriteLine("Передадите число!");
+            
+        }
+        
     }
 }
